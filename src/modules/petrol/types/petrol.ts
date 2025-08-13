@@ -17,6 +17,7 @@ export interface PetrolStation {
   localidad: string;
   horario: string;
   Gasolina95: string | null;
+  Gasolina98: string | null;
   Diesel: string | null;
   latitud: string;
   longitud: string;

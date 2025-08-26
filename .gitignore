@@ -1,4 +1,4 @@
-# Logs
+# --- Logs ---
 logs
 *.log
 npm-debug.log*
@@ -7,18 +7,38 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# --- Dependencias / caches ---
+node_modules/
+.pnpm-debug.log*
+.eslintcache
+*.tsbuildinfo
+
+# --- Build output (Vite) ---
+dist/
+dist-ssr/
+
+# --- Vite local files ---
 *.local
 
-# Editor directories and files
+# --- Env files (mantén solo los ejemplos) ---
+.env
+.env.*
+!.env.example
+
+# --- Herramientas de testing / coverage ---
+coverage/
+
+# --- Editores / SO ---
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# --- Hosting (opcional, si usas) ---
+.vercel/
+.netlify/

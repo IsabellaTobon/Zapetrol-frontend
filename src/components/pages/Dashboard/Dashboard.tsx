@@ -6,13 +6,14 @@ import { usePetrolData } from '../../../modules/petrol/hooks/usePetrolData';
 import { ProvinceSelector } from '../../../modules/petrol/components/ProvinceSelector';
 import { MunicipalitySelector } from '../../../modules/petrol/components/MunicipalitySelector';
 import { StationList } from '../../../modules/petrol/components/StationList';
+import { FavoritesTab } from './FavoritesTab';
 import './Dashboard.css';
 
 export const Dashboard: React.FC = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState<User[]>([]);
     const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-    const [activeTab, setActiveTab] = useState<'petrol' | 'users' | 'profile'>('petrol');
+    const [activeTab, setActiveTab] = useState<'petrol' | 'favorites' | 'users' | 'profile'>('petrol');
 
     // Hook para datos de gasolineras
     const {
@@ -84,6 +85,12 @@ export const Dashboard: React.FC = () => {
                             🔍 Buscar Gasolineras
                         </button>
                         <button
+                            className={`tab-btn ${activeTab === 'favorites' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('favorites')}
+                        >
+                            ⭐ Mis Favoritos
+                        </button>
+                        <button
                             className={`tab-btn ${activeTab === 'users' ? 'active' : ''}`}
                             onClick={() => setActiveTab('users')}
                         >
@@ -142,6 +149,11 @@ export const Dashboard: React.FC = () => {
                                 )}
                             </div>
                         </div>
+                    )}
+
+                    {/* Pestaña de Favoritos */}
+                    {activeTab === 'favorites' && (
+                        <FavoritesTab />
                     )}
 
                     {/* Pestaña de Gestión de Usuarios */}

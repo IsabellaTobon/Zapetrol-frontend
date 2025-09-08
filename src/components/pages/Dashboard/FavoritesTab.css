@@ -1,0 +1,269 @@
+/* Estilos para la pestaña de favoritos */
+.favorites-tab {
+    padding: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favorites-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.favorites-header h2 {
+    color: var(--gray-900);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.favorites-count {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Estado vacío */
+.empty-favorites {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--gray-600);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.7;
+}
+
+.empty-favorites h3 {
+    color: var(--gray-800);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.empty-favorites p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Estado de carga */
+.loading-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-xxl);
+    color: var(--gray-600);
+    font-size: 1.1rem;
+}
+
+/* Grid de favoritos */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* Tarjeta de favorito */
+.favorite-card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-lg);
+    transition: all 0.3s ease;
+    border: 1px solid var(--gray-200);
+    position: relative;
+}
+
+.favorite-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Header de la tarjeta */
+.favorite-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.favorite-header .station-name {
+    color: var(--gray-900);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+    margin-right: var(--spacing-sm);
+}
+
+.remove-button {
+    background: rgba(255, 99, 99, 0.1);
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.remove-button:hover {
+    background: rgba(255, 99, 99, 0.2);
+    transform: scale(1.1);
+}
+
+.remove-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+/* Detalles de la estación */
+.station-details {
+    margin-bottom: var(--spacing-lg);
+}
+
+.brand-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.brand {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.added-date {
+    color: var(--gray-500);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.location-info,
+.schedule-info {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.location-info .icon,
+.schedule-info .icon {
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.location-info div {
+    flex: 1;
+}
+
+.address {
+    color: var(--gray-800);
+    font-weight: 500;
+    margin: 0 0 2px 0;
+    font-size: 0.95rem;
+}
+
+.city {
+    color: var(--gray-600);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.schedule-info p {
+    color: var(--gray-700);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Precios de combustible */
+.fuel-prices {
+    background: var(--gray-50);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+}
+
+.fuel-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+}
+
+.fuel-row:not(:last-child) {
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: var(--spacing-xs);
+    padding-bottom: var(--spacing-sm);
+}
+
+.fuel-type {
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.price {
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .favorites-tab {
+        padding: var(--spacing-md);
+    }
+
+    .favorites-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .favorite-card {
+        padding: var(--spacing-md);
+    }
+
+    .brand-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .empty-favorites {
+        padding: var(--spacing-xl);
+    }
+
+    .empty-icon {
+        font-size: 3rem;
+    }
+}

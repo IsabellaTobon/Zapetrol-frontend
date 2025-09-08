@@ -28,13 +28,13 @@ export const usePetrolData = () => {
 
   useEffect(() => {
     const getMunicipalities = async (provinceId: number) => {
-        try {
-          const municipalities = await getPetrolMunicipalities(provinceId);
-          setMunicipalities(municipalities);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+      try {
+        const municipalities = await getPetrolMunicipalities(provinceId);
+        setMunicipalities(municipalities);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     if (selectedProvince !== null) {
       getMunicipalities(selectedProvince);

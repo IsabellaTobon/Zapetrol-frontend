@@ -1,31 +1,56 @@
-/* Colores principales */
+/* =========================================
+   Sistema de variables CSS
+   Paleta de colores con soporte para modo claro y oscuro
+   ========================================= */
+
 :root {
-    /* Colores primarios */
-    --primary-color: #667eea;
-    --primary-dark: #5a67d8;
-    --primary-light: #7c3aed;
+    /* ===== COLORES PRINCIPALES ===== */
+    /* Modo claro por defecto */
+    --background: #f8f6f6;
+    --background-rgb: 248, 246, 246;
+    --foreground: #0e1533;
+    --foreground-rgb: 14, 21, 51;
 
-    /* Colores secundarios */
-    --secondary-color: #764ba2;
-    --accent-color: #f093fb;
+    /* Colores de superficie */
+    --surface: #ffffff;
+    --surface-rgb: 255, 255, 255;
+    --surface-secondary: #f1f5f9;
+    --surface-secondary-rgb: 241, 245, 249;
 
-    /* Colores neutros */
+    /* Colores de texto */
+    --text-primary: #111827;
+    --text-primary-rgb: 17, 24, 39;
+    --text-secondary: #6b7280;
+    --text-secondary-rgb: 107, 114, 128;
+
+    /* Colores de acento */
+    --primary-color: #1d328f;
+    --primary-rgb: 29, 50, 143;
+    --primary-dark: #162654;
+    --accent: #3b82f6;
+    --accent-rgb: 59, 130, 246;
+    --accent-hover: #2563eb;
+
+    /* Colores utilitarios */
+    --light-gray: #9c9c9c;
+    --yellow: #f5c20a;
+    --success: #10b981;
+    --success-rgb: 16, 185, 129;
+    --warning: #f59e0b;
+    --warning-rgb: 245, 158, 11;
+    --error: #ef4444;
+    --error-rgb: 239, 68, 68;
+
+    /* Bordes */
+    --border: #e5e7eb;
+    --border-rgb: 229, 231, 235;
+    --border-light: #f3f4f6;
+
+    /* Colores especiales */
     --white: #ffffff;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-500: #6b7280;
-    --gray-700: #374151;
-    --gray-900: #111827;
+    --black: #000000;
 
-    /* Colores de estado */
-    --success-color: #10b981;
-    --error-color: #ef4444;
-    --warning-color: #f59e0b;
-    --info-color: #3b82f6;
-
-    /* Espaciado */
+    /* ===== ESPACIADO ===== */
     --spacing-xs: 0.25rem;
     /* 4px */
     --spacing-sm: 0.5rem;
@@ -38,8 +63,10 @@
     /* 32px */
     --spacing-2xl: 3rem;
     /* 48px */
+    --spacing-3xl: 4rem;
+    /* 64px */
 
-    /* Tipografía */
+    /* ===== TIPOGRAFÍA ===== */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-size-xs: 0.75rem;
     /* 12px */
@@ -55,11 +82,76 @@
     /* 24px */
     --font-size-3xl: 1.875rem;
     /* 30px */
+    --font-size-4xl: 2.25rem;
+    /* 36px */
 
-    /* Bordes y sombras */
+    /* ===== BORDES Y RADIOS ===== */
     --border-radius: 0.5rem;
+    /* 8px */
+    --border-radius-sm: 0.25rem;
+    /* 4px */
     --border-radius-lg: 1rem;
+    /* 16px */
+    --border-radius-xl: 1.5rem;
+    /* 24px */
+    --border-radius-full: 9999px;
+
+    /* ===== SOMBRAS ===== */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+    /* ===== TRANSICIONES ===== */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* ===== Z-INDEX ===== */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+}
+
+/* ===== MODO OSCURO ===== */
+.dark {
+    --background: #0f172a;
+    --background-rgb: 15, 23, 42;
+    --foreground: #f1f5f9;
+    --foreground-rgb: 241, 245, 249;
+
+    --surface: #1e293b;
+    --surface-rgb: 30, 41, 59;
+    --surface-secondary: #334155;
+    --surface-secondary-rgb: 51, 65, 85;
+
+    --text-primary: #f8fafc;
+    --text-primary-rgb: 248, 250, 252;
+    --text-secondary: #cbd5e1;
+    --text-secondary-rgb: 203, 213, 225;
+
+    --primary-color: #3b82f6;
+    --primary-rgb: 59, 130, 246;
+    --primary-dark: #2563eb;
+    --accent: #60a5fa;
+    --accent-rgb: 96, 165, 250;
+    --accent-hover: #93c5fd;
+
+    --light-gray: #64748b;
+    --yellow: #fbbf24;
+    --success: #34d399;
+    --success-rgb: 52, 211, 153;
+    --warning: #fbbf24;
+    --warning-rgb: 251, 191, 36;
+    --error: #f87171;
+    --error-rgb: 248, 113, 113;
+
+    --border: #475569;
+    --border-rgb: 71, 85, 105;
+    --border-light: #64748b;
 }

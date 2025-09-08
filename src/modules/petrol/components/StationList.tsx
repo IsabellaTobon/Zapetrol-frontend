@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PetrolStation } from '../types/petrol';
+import type { PetrolStation } from '../../../types/petrol';
 import { FavoriteButton } from '../../../components/common/FavoriteButton/FavoriteButton';
 import './StationList.css';
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../../../services/authService';
 import { useAuth } from '../../../contexts/AuthContext';
-import './AuthPages.css';
+import '../../../styles/components/auth.css';
 
 export const RegisterPage: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -97,60 +97,78 @@ export const RegisterPage: React.FC = () => {
                         )}
 
                         <div className="form-group">
-                            <label htmlFor="name">Nombre Completo</label>
+                            <label htmlFor="name" className="form-label">
+                                Nombre completo
+                            </label>
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
+                                className="form-input"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="Tu nombre completo"
+                                placeholder="Ingresa tu nombre completo"
                                 required
                                 disabled={isLoading}
+                                autoComplete="name"
+                                minLength={2}
+                                maxLength={50}
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email" className="form-label">
+                                Correo electrónico
+                            </label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
+                                className="form-input"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="tu@email.com"
+                                placeholder="Ingresa tu correo electrónico"
                                 required
                                 disabled={isLoading}
+                                autoComplete="email"
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="password">Contraseña</label>
+                            <label htmlFor="password" className="form-label">
+                                Contraseña
+                            </label>
                             <input
                                 type="password"
                                 id="password"
                                 name="password"
+                                className="form-input"
                                 value={formData.password}
                                 onChange={handleChange}
-                                placeholder="••••••••"
+                                placeholder="Crea una contraseña segura"
                                 required
                                 disabled={isLoading}
-                                minLength={6}
+                                autoComplete="new-password"
+                                minLength={8}
                             />
-                            <small className="form-help">Mínimo 6 caracteres</small>
+                            <small className="form-help">Mínimo 8 caracteres</small>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+                            <label htmlFor="confirmPassword" className="form-label">
+                                Confirmar contraseña
+                            </label>
                             <input
                                 type="password"
                                 id="confirmPassword"
                                 name="confirmPassword"
+                                className="form-input"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
-                                placeholder="••••••••"
+                                placeholder="Confirma tu contraseña"
                                 required
                                 disabled={isLoading}
+                                autoComplete="new-password"
                             />
                         </div>
 

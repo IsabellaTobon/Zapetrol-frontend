@@ -1,5 +1,11 @@
+/**
+ * Servicio de autenticación
+ * Maneja todas las operaciones relacionadas con la autenticación de usuarios
+ */
+
 import apiClient from './api';
 
+// ===== TIPOS =====
 export interface User {
     id: number;
     name: string;
@@ -26,76 +32,118 @@ export interface RegisterRequest {
     password: string;
 }
 
-// Servicio de autenticación
+// ===== CONSTANTES =====
+const TOKEN_KEY = 'access_token';
+const USER_KEY = 'user';
+
+// ===== SERVICIO DE AUTENTICACIÓN =====
 export const authService = {
-    // Registrar usuario
+    /**
+     * Registrar nuevo usuario
+     */
     async register(data: RegisterRequest): Promise<AuthResponse> {
         const response = await apiClient.post('/auth/register', data);
         return response.data;
     },
 
-    // Iniciar sesión
+    /**
+     * Iniciar sesión
+     */
     async login(data: LoginRequest): Promise<AuthResponse> {
         const response = await apiClient.post('/auth/login', data);
         return response.data;
     },
 
-    // Obtener perfil del usuario
+    /**
+     * Obtener perfil del usuario autenticado
+     */
     async getProfile(): Promise<User> {
         const response = await apiClient.get('/auth/profile');
         return response.data;
     },
 
-    // Cerrar sesión (limpiar localStorage)
+    /**
+     * Cerrar sesión y limpiar datos locales
+     */
     logout(): void {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('user');
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
     },
 
-    // Verificar si el usuario está autenticado
+    /**
+     * Verificar si el usuario está autenticado
+     */
     isAuthenticated(): boolean {
-        return !!localStorage.getItem('access_token');
+        return !!this.getToken();
     },
 
-    // Obtener token almacenado
+    /**
+     * Obtener token almacenado
+     */
     getToken(): string | null {
-        return localStorage.getItem('access_token');
+        return localStorage.getItem(TOKEN_KEY);
     },
 
-    // Obtener usuario almacenado
+    /**
+     * Obtener usuario almacenado en localStorage
+     */
     getCurrentUser(): User | null {
-        const userStr = localStorage.getItem('user');
-        return userStr ? JSON.parse(userStr) : null;
+        const userStr = localStorage.getItem(USER_KEY);
+        if (!userStr) return null;
+
+        try {
+            return JSON.parse(userStr);
+        } catch (error) {
+            console.warn('Error al parsear usuario desde localStorage:', error);
+            return null;
+        }
     },
 
-    // Guardar datos de autenticación
+    /**
+     * Guardar datos de autenticación en localStorage
+     */
     saveAuthData(authResponse: AuthResponse): void {
-        localStorage.setItem('access_token', authResponse.access_token);
-        localStorage.setItem('user', JSON.stringify(authResponse.user));
+        localStorage.setItem(TOKEN_KEY, authResponse.access_token);
+        localStorage.setItem(USER_KEY, JSON.stringify(authResponse.user));
+    },
+
+    /**
+     * Limpiar datos de autenticación
+     */
+    clearAuthData(): void {
+        this.logout();
     }
 };
 
-// Servicio de usuarios (para el dashboard)
+// ===== SERVICIO DE USUARIOS =====
 export const userService = {
-    // Listar todos los usuarios
+    /**
+     * Obtener todos los usuarios (requiere autenticación)
+     */
     async getAllUsers(): Promise<User[]> {
         const response = await apiClient.get('/users');
         return response.data;
     },
 
-    // Obtener usuario por ID
+    /**
+     * Obtener usuario por ID
+     */
     async getUserById(id: number): Promise<User> {
         const response = await apiClient.get(`/users/${id}`);
         return response.data;
     },
 
-    // Actualizar usuario
+    /**
+     * Actualizar datos del usuario
+     */
     async updateUser(id: number, data: Partial<User>): Promise<User> {
         const response = await apiClient.patch(`/users/${id}`, data);
         return response.data;
     },
 
-    // Eliminar usuario
+    /**
+     * Eliminar usuario
+     */
     async deleteUser(id: number): Promise<void> {
         await apiClient.delete(`/users/${id}`);
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFavorites } from '../../../hooks/useFavorites';
-import { usePetrolData } from '../../../modules/petrol/hooks/usePetrolData';
+import { usePetrolData } from '../../../hooks/usePetrolData';
 import './FavoritesTab.css';
 
 export const FavoritesTab: React.FC = () => {

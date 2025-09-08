@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { userService } from '../../../services/authService';
 import type { User } from '../../../services/authService';
-import { usePetrolData } from '../../../modules/petrol/hooks/usePetrolData';
+import { usePetrolData } from '../../../hooks/usePetrolData';
 import { ProvinceSelector } from '../../../modules/petrol/components/ProvinceSelector';
 import { MunicipalitySelector } from '../../../modules/petrol/components/MunicipalitySelector';
 import { StationList } from '../../../modules/petrol/components/StationList';
@@ -124,15 +124,17 @@ export const Dashboard: React.FC = () => {
                                         provinces={provinces}
                                         selectedId={selectedProvince}
                                         onSelect={setSelectedProvince}
+                                        label="Provincia"
+                                        disabled={provinces.length === 0}
                                     />
 
-                                    {selectedProvince && (
-                                        <MunicipalitySelector
-                                            municipalities={municipalities}
-                                            selectedId={selectedMunicipality}
-                                            onSelect={setSelectedMunicipality}
-                                        />
-                                    )}
+                                    <MunicipalitySelector
+                                        municipalities={municipalities}
+                                        selectedId={selectedMunicipality}
+                                        onSelect={setSelectedMunicipality}
+                                        label="Municipio"
+                                        disabled={!selectedProvince || municipalities.length === 0}
+                                    />
                                 </div>
 
                                 {selectedMunicipality && stations.length > 0 && (

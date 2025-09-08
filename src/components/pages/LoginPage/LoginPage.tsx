@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../../../services/authService';
 import { useAuth } from '../../../contexts/AuthContext';
-import './AuthPages.css';
+import '../../../styles/components/auth.css';
 
 export const LoginPage: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -78,30 +78,40 @@ export const LoginPage: React.FC = () => {
                         )}
 
                         <div className="form-group">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email" className="form-label">
+                                Correo electrónico
+                            </label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
+                                className="form-input"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="tu@email.com"
+                                placeholder="Ingresa tu correo electrónico"
                                 required
                                 disabled={isLoading}
+                                autoComplete="email"
+                                aria-describedby="email-help"
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="password">Contraseña</label>
+                            <label htmlFor="password" className="form-label">
+                                Contraseña
+                            </label>
                             <input
                                 type="password"
                                 id="password"
                                 name="password"
+                                className="form-input"
                                 value={formData.password}
                                 onChange={handleChange}
-                                placeholder="••••••••"
+                                placeholder="Ingresa tu contraseña"
                                 required
                                 disabled={isLoading}
+                                autoComplete="current-password"
+                                minLength={8}
                             />
                         </div>
 

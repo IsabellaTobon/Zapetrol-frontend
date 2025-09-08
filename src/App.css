@@ -1,6 +1,13 @@
-/* App styles - minimal para no interferir */
+/**
+ * Estilos del componente principal de la aplicación
+ */
+
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
 }

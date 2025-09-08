@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import { ThemeToggle } from '../../common/ThemeToggle/ThemeToggle';
 import './Navbar.css';
 
 export const Navbar: React.FC = () => {
@@ -21,6 +22,8 @@ export const Navbar: React.FC = () => {
 
                 {/* Botones de autenticación o usuario */}
                 <div className="navbar-actions">
+                    <ThemeToggle />
+
                     {isAuthenticated ? (
                         // Usuario autenticado
                         <>

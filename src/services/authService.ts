@@ -4,33 +4,7 @@
  */
 
 import apiClient from './api';
-
-// ===== TIPOS =====
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface AuthResponse {
-    access_token: string;
-    token_type: string;
-    user: User;
-    message?: string;
-}
-
-export interface LoginRequest {
-    email: string;
-    password: string;
-}
-
-export interface RegisterRequest {
-    name: string;
-    email: string;
-    password: string;
-}
+import type { User, AuthResponse, LoginRequest, RegisterRequest } from '../types';
 
 // ===== CONSTANTES =====
 const TOKEN_KEY = 'access_token';

@@ -1,5 +1,5 @@
 import apiClient from './api';
-import type { Favorite, AddFavoriteRequest } from '../types/favorites';
+import type { Favorite, CreateFavoriteRequest } from '../types';
 
 // Servicio para manejar las operaciones de favoritos
 export const favoritesService = {
@@ -10,7 +10,7 @@ export const favoritesService = {
     },
 
     // Agregar una gasolinera a favoritos
-    async addFavorite(data: AddFavoriteRequest): Promise<Favorite> {
+    async addFavorite(data: CreateFavoriteRequest): Promise<Favorite> {
         const response = await apiClient.post('/favorites', data);
         return response.data;
     },

@@ -1,8 +1,8 @@
 import React from 'react';
 import { usePetrolData } from '../../../hooks/usePetrolData';
-import { ProvinceSelector } from '../../../modules/petrol/components/ProvinceSelector';
-import { MunicipalitySelector } from '../../../modules/petrol/components/MunicipalitySelector';
-import { StationList } from '../../../modules/petrol/components/StationList';
+import { ProvinceSelector } from '../../petrol/ProvinceSelector';
+import { MunicipalitySelector } from '../../petrol/MunicipalitySelector';
+import { StationList } from '../../petrol/StationList';
 import './HomePage.css';
 
 export const HomePage: React.FC = () => {

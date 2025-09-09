@@ -7,6 +7,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { ToastProvider } from './components/common/Toast/Toast';
 import { Navbar } from './components/layout/Navbar/Navbar';
 import { HomePage } from './components/pages/HomePage/HomePage';
 import { LoginPage } from './components/pages/LoginPage/LoginPage';
@@ -44,58 +45,60 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <Router>
-        <AuthProvider>
-          <div className="app">
-            <Routes>
-              {/* Páginas públicas con navegación */}
-              <Route
-                path="/"
-                element={
-                  <PublicLayout>
-                    <HomePage />
-                  </PublicLayout>
-                }
-              />
+      <ToastProvider>
+        <Router>
+          <AuthProvider>
+            <div className="app">
+              <Routes>
+                {/* Páginas públicas con navegación */}
+                <Route
+                  path="/"
+                  element={
+                    <PublicLayout>
+                      <HomePage />
+                    </PublicLayout>
+                  }
+                />
 
-              {/* Páginas de autenticación (sin navegación) */}
-              <Route
-                path="/login"
-                element={
-                  <AuthRedirect>
-                    <LoginPage />
-                  </AuthRedirect>
-                }
-              />
+                {/* Páginas de autenticación (sin navegación) */}
+                <Route
+                  path="/login"
+                  element={
+                    <AuthRedirect>
+                      <LoginPage />
+                    </AuthRedirect>
+                  }
+                />
 
-              <Route
-                path="/register"
-                element={
-                  <AuthRedirect>
-                    <RegisterPage />
-                  </AuthRedirect>
-                }
-              />
+                <Route
+                  path="/register"
+                  element={
+                    <AuthRedirect>
+                      <RegisterPage />
+                    </AuthRedirect>
+                  }
+                />
 
-              {/* Páginas protegidas */}
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
+                {/* Páginas protegidas */}
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
 
-              {/* Fallback - redirigir a home */}
-              <Route
-                path="*"
-                element={<Navigate to="/" replace />}
-              />
-            </Routes>
-          </div>
-        </AuthProvider>
-      </Router>
+                {/* Fallback - redirigir a home */}
+                <Route
+                  path="*"
+                  element={<Navigate to="/" replace />}
+                />
+              </Routes>
+            </div>
+          </AuthProvider>
+        </Router>
+      </ToastProvider>
     </ThemeProvider>
   );
 };

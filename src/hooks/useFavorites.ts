@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { favoritesService } from '../services/favoritesService';
-import type { Favorite } from '../types/favorites';
+import type { Favorite } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 
 // Hook personalizado para manejar el estado de favoritos

@@ -1,6 +1,6 @@
 import React from 'react';
-import type { PetrolStation } from '../../../types/petrol';
-import { FavoriteButton } from '../../../components/common/FavoriteButton/FavoriteButton';
+import type { PetrolStation } from '../../types';
+import { FavoriteButton } from '../common/FavoriteButton/FavoriteButton';
 import './StationList.css';
 
 interface Props {

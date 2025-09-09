@@ -1,0 +1,389 @@
+/* Estilos para el componente FormInput simplificado */
+
+.form-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
+    width: 100%;
+}
+
+.form-input-label {
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.required-asterisk {
+    color: var(--error);
+    margin-left: 2px;
+}
+
+.form-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-sm);
+    border: 2px solid var(--border);
+    border-radius: var(--border-radius-md);
+    background: var(--background);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    font-family: inherit;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.form-input.has-icon {
+    padding-left: 3rem;
+}
+
+.form-input::placeholder {
+    color: var(--text-tertiary);
+    opacity: 0.7;
+}
+
+/* Estados del input */
+.form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-alpha-20);
+}
+
+.form-input:disabled {
+    background: var(--background-secondary);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+}
+
+.form-input.has-icon {
+    padding-left: 3rem;
+}
+
+.form-input-icon {
+    position: absolute;
+    left: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.password-toggle,
+.validation-icon {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    z-index: 2;
+}
+
+.password-toggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.password-toggle:hover:not(:disabled) {
+    color: var(--text-primary);
+    background: var(--background-secondary);
+}
+
+.password-toggle:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.validation-icon.success {
+    color: var(--success);
+}
+
+.validation-icon.error {
+    color: var(--error);
+}
+
+.form-input-help {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    line-height: var(--line-height-tight);
+}
+
+.form-input-error {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    color: var(--error);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* Estados del contenedor */
+.form-input-container.is-focused .form-input {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.form-input-container.is-focused .form-input-label:not(.is-floating) {
+    color: var(--primary);
+    transform: translateY(-50%) scale(0.95);
+}
+
+.form-input-container.is-focused .form-input-icon {
+    color: var(--primary);
+}
+
+.form-input-container.has-error .form-input {
+    border-color: var(--error);
+}
+
+.form-input-container.has-error .form-input:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 10%, transparent);
+}
+
+.form-input-container.has-error .form-input-label {
+    color: var(--error);
+}
+
+.form-input-container.is-valid .form-input {
+    border-color: var(--success);
+}
+
+.form-input-container.is-valid .form-input-label {
+    color: var(--success);
+}
+
+/* Animaciones */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+.form-input-container.has-error .form-input {
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Responsive Design Mejorado */
+
+/* Tablet landscape */
+@media (max-width: 1024px) {
+    .form-input {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .form-input.has-icon {
+        padding-left: 2.75rem;
+    }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+    .form-input-container {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .form-input {
+        padding: var(--spacing-md) var(--spacing-sm);
+        font-size: var(--font-size-base);
+        min-height: 48px;
+        /* Mínimo para touch targets */
+    }
+
+    .form-input.has-icon {
+        padding-left: 2.5rem;
+    }
+
+    .form-input-icon {
+        left: var(--spacing-xs);
+        width: 18px;
+        height: 18px;
+    }
+
+    .password-toggle,
+    .validation-icon {
+        width: 40px;
+        height: 40px;
+        right: var(--spacing-xs);
+    }
+
+    .form-input-label {
+        font-size: var(--font-size-base);
+    }
+
+    .form-input-help,
+    .form-input-error {
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Mobile landscape */
+@media (max-width: 640px) {
+    .form-input {
+        padding: var(--spacing-sm) var(--spacing-sm);
+        border-radius: var(--border-radius);
+    }
+
+    .form-input.has-icon {
+        padding-left: 2.25rem;
+    }
+
+    .form-input-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+    .form-input-container {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .form-input {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-base);
+        min-height: 44px;
+        border-width: 1px;
+    }
+
+    .form-input.has-icon {
+        padding-left: 2rem;
+    }
+
+    .form-input-icon {
+        left: var(--spacing-xs);
+        width: 16px;
+        height: 16px;
+    }
+
+    .password-toggle,
+    .validation-icon {
+        width: 36px;
+        height: 36px;
+        right: var(--spacing-xs);
+    }
+
+    .form-input-label {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .form-input-help,
+    .form-input-error {
+        font-size: var(--font-size-xs);
+        margin-top: 4px;
+    }
+
+    /* Focus states optimized for mobile */
+    .form-input:focus {
+        box-shadow: 0 0 0 2px var(--primary-alpha-20);
+        border-width: 2px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .form-input {
+        padding: 10px var(--spacing-xs);
+        min-height: 42px;
+    }
+
+    .form-input.has-icon {
+        padding-left: 1.75rem;
+    }
+
+    .form-input-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .password-toggle,
+    .validation-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* High DPI / Retina displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx) {
+
+    .form-input-icon svg,
+    .password-toggle svg,
+    .validation-icon svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .form-input {
+        border-width: 2px;
+    }
+
+    .form-input:focus {
+        box-shadow: 0 0 0 3px var(--primary);
+        outline: 2px solid var(--background);
+        outline-offset: 1px;
+    }
+
+    .form-input-container.has-error .form-input {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .form-input,
+    .form-input-icon,
+    .password-toggle {
+        transition: none;
+    }
+
+    .form-input-container.has-error .form-input {
+        animation: none;
+    }
+}
+
+/* Touch devices optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .password-toggle {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .form-input {
+        min-height: 44px;
+    }
+}

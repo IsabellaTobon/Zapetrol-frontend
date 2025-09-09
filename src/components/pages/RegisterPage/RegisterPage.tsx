@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../../../services/authService';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useFormValidation, authValidationRules } from '../../../hooks/useFormValidation';
+import { FormInput } from '../../common/FormInput/FormInput';
+import type { RegisterRequest } from '../../../types';
 import '../../../styles/components/auth.css';
+import './RegisterPage.css';
 
 export const RegisterPage: React.FC = () => {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<RegisterRequest & { confirmPassword: string }>({
         name: '',
         email: '',
         password: '',
@@ -17,28 +21,53 @@ export const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
+    // Configurar validaciones específicas para registro
+    const registerValidationRules = {
+        ...authValidationRules,
+        confirmPassword: {
+            required: true,
+            custom: (value: string) => {
+                if (value !== formData.password) {
+                    return 'Las contraseñas no coinciden';
+                }
+                return null;
+            }
+        }
+    };
+
+    const { errors, validateForm, clearFieldError } = useFormValidation(registerValidationRules);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+
+        // Limpiar error del campo cuando el usuario empiece a escribir
+        if (errors[name]) {
+            clearFieldError(name);
+        }
+
+        // Si cambia la contraseña, también validar confirmPassword
+        if (name === 'password' && errors.confirmPassword) {
+            clearFieldError('confirmPassword');
+        }
+
+        // Limpiar error general
+        if (error) {
+            setError('');
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
         setError('');
 
-        // Validaciones del frontend
-        if (formData.password !== formData.confirmPassword) {
-            setError('Las contraseñas no coinciden');
-            setIsLoading(false);
+        // Validar formulario
+        const isValid = validateForm(formData as unknown as Record<string, string>);
+        if (!isValid) {
             return;
         }
 
-        if (formData.password.length < 6) {
-            setError('La contraseña debe tener al menos 6 caracteres');
-            setIsLoading(false);
-            return;
-        }
+        setIsLoading(true);
 
         try {
             const response = await authService.register({
@@ -91,93 +120,112 @@ export const RegisterPage: React.FC = () => {
 
                     <form onSubmit={handleSubmit} className="auth-form">
                         {error && (
-                            <div className="error-message">
+                            <div className="error-message auth-form-full-width" role="alert">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="15" y1="9" x2="9" y2="15" />
+                                    <line x1="9" y1="9" x2="15" y2="15" />
+                                </svg>
                                 {error}
                             </div>
                         )}
 
-                        <div className="form-group">
-                            <label htmlFor="name" className="form-label">
-                                Nombre completo
-                            </label>
-                            <input
+                        <div className="auth-form-grid">
+                            <FormInput
+                                label="Nombre"
                                 type="text"
-                                id="name"
                                 name="name"
-                                className="form-input"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="Ingresa tu nombre completo"
+                                placeholder="Tu nombre completo"
+                                error={errors.name}
                                 required
                                 disabled={isLoading}
                                 autoComplete="name"
-                                minLength={2}
-                                maxLength={50}
+                                icon={
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                }
                             />
-                        </div>
 
-                        <div className="form-group">
-                            <label htmlFor="email" className="form-label">
-                                Correo electrónico
-                            </label>
-                            <input
+                            <FormInput
+                                label="Email"
                                 type="email"
-                                id="email"
                                 name="email"
-                                className="form-input"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="Ingresa tu correo electrónico"
+                                placeholder="ejemplo@correo.com"
+                                error={errors.email}
                                 required
                                 disabled={isLoading}
                                 autoComplete="email"
+                                icon={
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg>
+                                }
                             />
-                        </div>
 
-                        <div className="form-group">
-                            <label htmlFor="password" className="form-label">
-                                Contraseña
-                            </label>
-                            <input
+                            <FormInput
+                                label="Contraseña"
                                 type="password"
-                                id="password"
                                 name="password"
-                                className="form-input"
                                 value={formData.password}
                                 onChange={handleChange}
                                 placeholder="Crea una contraseña segura"
+                                error={errors.password}
                                 required
                                 disabled={isLoading}
                                 autoComplete="new-password"
-                                minLength={8}
+                                showPasswordToggle={true}
+                                icon={
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                        <circle cx="12" cy="16" r="1" />
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                    </svg>
+                                }
                             />
-                            <small className="form-help">Mínimo 8 caracteres</small>
-                        </div>
 
-                        <div className="form-group">
-                            <label htmlFor="confirmPassword" className="form-label">
-                                Confirmar contraseña
-                            </label>
-                            <input
+                            <FormInput
+                                label="Confirmar contraseña"
                                 type="password"
-                                id="confirmPassword"
                                 name="confirmPassword"
-                                className="form-input"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
                                 placeholder="Confirma tu contraseña"
+                                error={errors.confirmPassword}
                                 required
                                 disabled={isLoading}
                                 autoComplete="new-password"
+                                showPasswordToggle={true}
+                                icon={
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                        <path d="M9 12l2 2 4-4" />
+                                    </svg>
+                                }
                             />
                         </div>
 
                         <button
                             type="submit"
-                            className="btn btn-primary btn-full"
+                            className="btn btn-primary btn-full auth-form-full-width"
                             disabled={isLoading}
                         >
-                            {isLoading ? 'Creando cuenta...' : 'Crear Cuenta'}
+                            {isLoading ? (
+                                <>
+                                    <svg className="loading-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 12a9 9 0 11-6.219-8.56" />
+                                    </svg>
+                                    Creando cuenta...
+                                </>
+                            ) : (
+                                'Crear Cuenta'
+                            )}
                         </button>
                     </form>
 

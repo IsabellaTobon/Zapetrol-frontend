@@ -22,7 +22,7 @@
 
 .auth-container {
     width: 100%;
-    max-width: 450px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
@@ -310,4 +310,46 @@
     .back-link {
         align-self: flex-start;
     }
+}
+
+/* Estilos específicos para LoginPage mejorado */
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+    margin-right: var(--spacing-sm);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: color-mix(in srgb, var(--error) 10%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--error) 30%, transparent);
+    border-radius: var(--border-radius-md);
+    color: var(--error);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-lg);
+}
+
+.error-message svg {
+    flex-shrink: 0;
+}
+
+.btn-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
 }

@@ -1,4 +1,4 @@
-import type { Municipality, PetrolStation, Province } from "../types/petrol";
+import type { Municipality, PetrolStation, Province } from "../types";
 
 const API_BASE = import.meta.env.VITE_EXTERNAL_API;
 

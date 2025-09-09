@@ -2,7 +2,7 @@
  * Utilidades comunes de la aplicación
  */
 
-import { VALIDATION_CONFIG } from '../config/constants';
+import { VALIDATION_CONFIG } from './constants';
 
 // ===== UTILIDADES DE VALIDACIÓN =====
 

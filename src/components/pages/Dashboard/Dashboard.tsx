@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { userService } from '../../../services/authService';
-import type { User } from '../../../services/authService';
+import type { User } from '../../../types';
 import { usePetrolData } from '../../../hooks/usePetrolData';
-import { ProvinceSelector } from '../../../modules/petrol/components/ProvinceSelector';
-import { MunicipalitySelector } from '../../../modules/petrol/components/MunicipalitySelector';
-import { StationList } from '../../../modules/petrol/components/StationList';
+import { ProvinceSelector } from '../../petrol/ProvinceSelector';
+import { MunicipalitySelector } from '../../petrol/MunicipalitySelector';
+import { StationList } from '../../petrol/StationList';
 import { FavoritesTab } from './FavoritesTab';
 import './Dashboard.css';
 

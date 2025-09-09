@@ -2,7 +2,7 @@
  * Selector de municipio con label y estilos mejorados
  */
 import React from 'react';
-import type { Municipality } from '../../../types/petrol';
+import type { Municipality } from '../../types';
 
 interface Props {
   municipalities: Municipality[];

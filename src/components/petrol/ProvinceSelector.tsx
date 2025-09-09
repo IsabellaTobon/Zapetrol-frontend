@@ -2,7 +2,7 @@
  * Selector de provincia con label y estilos mejorados
  */
 import React from 'react';
-import type { Province } from '../../../types/petrol';
+import type { Province } from '../../types';
 
 interface Props {
   provinces: Province[];

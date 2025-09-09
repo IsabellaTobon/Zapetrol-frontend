@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Province, Municipality, PetrolStation } from '../types/petrol';
+import type { Province, Municipality, PetrolStation } from '../types';
 import {
   getPetrolProvinces,
   getPetrolMunicipalities,

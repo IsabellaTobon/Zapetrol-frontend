@@ -19,10 +19,17 @@
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .navbar-container {
+        padding: 0 var(--spacing-xl);
+    }
 }
 
 .navbar-brand {
@@ -32,6 +39,7 @@
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
+    z-index: 1001;
 }
 
 .navbar-brand:hover {
@@ -46,6 +54,100 @@
 
 .navbar-brand:hover .logo {
     transform: scale(1.1) rotate(5deg);
+}
+
+/* Botón menú móvil */
+.mobile-menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(var(--text-primary-rgb), 0.1);
+}
+
+.mobile-menu-toggle svg {
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-toggle svg.rotate-90 {
+    transform: rotate(90deg);
+}
+
+/* Navegación principal */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+/* Responsive: menú móvil */
+@media (max-width: 767px) {
+    .navbar-actions {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(var(--surface-rgb), 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 5rem var(--spacing-lg) var(--spacing-lg);
+        transition: right 0.3s ease;
+        border-left: 1px solid rgba(var(--border-rgb), 0.2);
+        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-actions.mobile-menu-open {
+        right: 0;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-lg);
+        width: 100%;
+    }
+
+    .user-menu {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
+        width: 100%;
+        padding-top: var(--spacing-lg);
+        border-top: 1px solid rgba(var(--border-rgb), 0.2);
+    }
+
+    .user-greeting {
+        text-align: center;
+        padding: var(--spacing-sm);
+        background: rgba(var(--primary-rgb), 0.1);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-sm);
+    }
+
+    .btn-outline-white,
+    .btn-white {
+        width: 100%;
+        text-align: center;
+        padding: var(--spacing-md);
+        font-size: var(--font-size-base);
+        border-radius: var(--border-radius);
+    }
 }
 
 .navbar-brand h2 {

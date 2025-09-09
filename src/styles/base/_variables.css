@@ -22,6 +22,8 @@
     --text-primary-rgb: 17, 24, 39;
     --text-secondary: #6b7280;
     --text-secondary-rgb: 107, 114, 128;
+    --text-tertiary: #9ca3af;
+    --text-disabled: #d1d5db;
 
     /* Colores de acento */
     --primary-color: #1d328f;
@@ -49,6 +51,14 @@
     /* Colores especiales */
     --white: #ffffff;
     --black: #000000;
+
+    /* ===== COLORES CON TRANSPARENCIA ===== */
+    --primary-alpha-10: rgba(var(--primary-rgb), 0.1);
+    --primary-alpha-20: rgba(var(--primary-rgb), 0.2);
+    --primary-alpha-30: rgba(var(--primary-rgb), 0.3);
+    --success-alpha-20: rgba(var(--success-rgb), 0.2);
+    --error-alpha-20: rgba(var(--error-rgb), 0.2);
+    --warning-alpha-20: rgba(var(--warning-rgb), 0.2);
 
     /* ===== ESPACIADO ===== */
     --spacing-xs: 0.25rem;
@@ -112,8 +122,6 @@
     --z-dropdown: 1000;
     --z-sticky: 1020;
     --z-fixed: 1030;
-    --z-modal-backdrop: 1040;
-    --z-modal: 1050;
     --z-popover: 1060;
     --z-tooltip: 1070;
 }
@@ -134,6 +142,8 @@
     --text-primary-rgb: 248, 250, 252;
     --text-secondary: #cbd5e1;
     --text-secondary-rgb: 203, 213, 225;
+    --text-tertiary: #94a3b8;
+    --text-disabled: #64748b;
 
     --primary-color: #3b82f6;
     --primary-rgb: 59, 130, 246;
@@ -154,4 +164,39 @@
     --border: #475569;
     --border-rgb: 71, 85, 105;
     --border-light: #64748b;
+
+    /* Colores con transparencia para tema oscuro */
+    --primary-alpha-10: rgba(var(--primary-rgb), 0.1);
+    --primary-alpha-20: rgba(var(--primary-rgb), 0.2);
+    --primary-alpha-30: rgba(var(--primary-rgb), 0.3);
+    --success-alpha-20: rgba(var(--success-rgb), 0.2);
+    --error-alpha-20: rgba(var(--error-rgb), 0.2);
+    --warning-alpha-20: rgba(var(--warning-rgb), 0.2);
+}
+
+/* ===== BREAKPOINTS RESPONSIVE ===== */
+/* 
+Breakpoints estándar para diseño responsive:
+- Mobile: 320px - 767px
+- Tablet: 768px - 1023px  
+- Desktop: 1024px+
+- Large Desktop: 1440px+
+*/
+
+/* Variables de contenedor responsivo */
+:root {
+    --container-mobile: 100%;
+    --container-tablet: 750px;
+    --container-desktop: 1200px;
+    --container-large: 1400px;
+
+    /* Márgenes responsive */
+    --margin-mobile: var(--spacing-md);
+    --margin-tablet: var(--spacing-lg);
+    --margin-desktop: var(--spacing-xl);
+
+    /* Espaciado responsive */
+    --section-padding-mobile: var(--spacing-lg);
+    --section-padding-tablet: var(--spacing-xl);
+    --section-padding-desktop: var(--spacing-2xl);
 }

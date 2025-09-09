@@ -434,51 +434,240 @@
     animation: fadeInUp 0.8s ease-out 0.8s both;
 }
 
-/* Responsive Design */
+/* Responsive Design Mejorado */
+
+/* Tablet landscape y pantallas medianas */
+@media (max-width: 1024px) {
+    .hero-section {
+        padding: 4rem 1rem 3rem;
+    }
+
+    .search-container,
+    .info-container {
+        padding: 2rem;
+        margin: 0 var(--spacing-md);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+}
+
+/* Tablet portrait */
 @media (max-width: 768px) {
     .hero-section {
-        padding: 2rem 1rem;
+        padding: 3rem 1rem 2rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 6vw, 3rem);
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: center;
     }
 
     .search-container,
     .info-container {
         padding: 1.5rem;
-        margin: 0 1rem;
+        margin: 0 var(--spacing-md);
+        border-radius: var(--border-radius-lg);
     }
 
     .features-grid {
         grid-template-columns: 1fr;
-        padding: 1rem;
+        padding: var(--spacing-md);
+        gap: var(--spacing-lg);
     }
 
     .feature-card {
         padding: 1.5rem;
+        text-align: center;
     }
 
     .info-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
     }
 
     .search-controls {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .search-controls .btn {
+        width: 100%;
     }
 }
 
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
+/* Mobile landscape */
+@media (max-width: 640px) {
+    .homepage {
+        padding-bottom: var(--spacing-xl);
     }
 
-    .hero-subtitle {
-        font-size: 1.125rem;
+    .hero-section {
+        padding: 2rem var(--spacing-md) 1.5rem;
     }
 
     .search-container,
     .info-container {
-        padding: 1rem;
+        margin: 0 var(--spacing-sm);
+        padding: var(--spacing-lg);
+    }
+
+    .features-grid {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-md);
     }
 
     .feature-card {
-        padding: 1rem;
+        padding: var(--spacing-lg);
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 1.5rem var(--spacing-sm) 1rem;
+    }
+
+    .hero-title {
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
+        line-height: 1.2;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        min-width: unset;
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .search-container,
+    .info-container {
+        padding: var(--spacing-md);
+        margin: 0 var(--spacing-xs);
+        border-radius: var(--border-radius);
+    }
+
+    .feature-card {
+        padding: var(--spacing-md);
+    }
+
+    .feature-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .feature-description {
+        font-size: var(--font-size-sm);
+        line-height: 1.5;
+    }
+
+    .section-title {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .section-subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .hero-section {
+        padding: 1rem var(--spacing-xs) 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .search-container,
+    .info-container {
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .features-grid {
+        padding: var(--spacing-xs);
+    }
+}
+
+/* Mejoras para pantallas grandes */
+@media (min-width: 1440px) {
+    .hero-section {
+        padding: 8rem 1rem 6rem;
+    }
+
+    .search-container,
+    .info-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--spacing-xl);
+    }
+
+    .feature-card {
+        padding: 2rem;
+    }
+}
+
+/* Reducir animaciones en dispositivos que lo prefieren */
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-title,
+    .hero-subtitle,
+    .hero-cta,
+    .search-container,
+    .features-section,
+    .info-container,
+    .data-source-section {
+        animation: none;
+    }
+
+    .feature-card:hover {
+        transform: none;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .feature-card {
+        border: 2px solid var(--border);
+    }
+
+    .hero-title-accent {
+        -webkit-text-fill-color: var(--primary-color);
+        background: none;
     }
 }

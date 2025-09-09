@@ -6,7 +6,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { authService } from '../services/authService';
-import type { User } from '../services/authService';
+import type { User } from '../types';
 
 // ===== TIPOS =====
 interface AuthContextType {

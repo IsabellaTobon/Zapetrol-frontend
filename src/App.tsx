@@ -9,6 +9,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './components/common/Toast/Toast';
 import { Navbar } from './components/layout/Navbar/Navbar';
+import { Footer } from './components/layout/Footer/Footer';
 import { HomePage } from './components/pages/HomePage/HomePage';
 import { LoginPage } from './components/pages/LoginPage/LoginPage';
 import { RegisterPage } from './components/pages/RegisterPage/RegisterPage';
@@ -38,6 +39,7 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   <>
     <Navbar />
     {children}
+    <Footer />
   </>
 );
 
@@ -65,7 +67,9 @@ const App: React.FC = () => {
                   path="/login"
                   element={
                     <AuthRedirect>
-                      <LoginPage />
+                      <PublicLayout>
+                        <LoginPage />
+                      </PublicLayout>
                     </AuthRedirect>
                   }
                 />
@@ -74,7 +78,9 @@ const App: React.FC = () => {
                   path="/register"
                   element={
                     <AuthRedirect>
-                      <RegisterPage />
+                      <PublicLayout>
+                        <RegisterPage />
+                      </PublicLayout>
                     </AuthRedirect>
                   }
                 />
@@ -84,7 +90,9 @@ const App: React.FC = () => {
                   path="/dashboard"
                   element={
                     <ProtectedRoute>
-                      <Dashboard />
+                      <PublicLayout>
+                        <Dashboard />
+                      </PublicLayout>
                     </ProtectedRoute>
                   }
                 />

@@ -1,5 +1,6 @@
 import React from 'react';
-import type { PetrolStation } from '../types/petrol';
+import type { PetrolStation } from '../../types';
+import { FavoriteButton } from '../common/FavoriteButton/FavoriteButton';
 import './StationList.css';
 
 interface Props {
@@ -13,11 +14,15 @@ export const StationList: React.FC<Props> = ({ stations }) => {
     <div className="station-grid">
       {stations.map((station) => (
         <div key={station.idEstacion} className="station-card">
+          <FavoriteButton
+            stationId={station.idEstacion}
+          />
+
           <div className="station-header">
             <h3 className="station-name">{station.nombreEstacion}</h3>
             <span className="station-brand">{station.marca}</span>
           </div>
-          
+
           <div className="station-info">
             <div className="location">
               <span className="icon">📍</span>
@@ -26,7 +31,7 @@ export const StationList: React.FC<Props> = ({ stations }) => {
                 <p className="city">{station.localidad} - {station.codPostal}</p>
               </div>
             </div>
-            
+
             {station.horario && (
               <div className="schedule">
                 <span className="icon">🕒</span>
@@ -34,7 +39,7 @@ export const StationList: React.FC<Props> = ({ stations }) => {
               </div>
             )}
           </div>
-          
+
           <div className="fuel-prices">
             <div className="fuel-item">
               <span className="fuel-type">⛽ Gasolina 95</span>

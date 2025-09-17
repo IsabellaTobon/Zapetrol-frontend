@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Province, Municipality, PetrolStation } from '../types/petrol';
+import type { Province, Municipality, PetrolStation } from '../types';
 import {
   getPetrolProvinces,
   getPetrolMunicipalities,
@@ -28,13 +28,13 @@ export const usePetrolData = () => {
 
   useEffect(() => {
     const getMunicipalities = async (provinceId: number) => {
-        try {
-          const municipalities = await getPetrolMunicipalities(provinceId);
-          setMunicipalities(municipalities);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+      try {
+        const municipalities = await getPetrolMunicipalities(provinceId);
+        setMunicipalities(municipalities);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     if (selectedProvince !== null) {
       getMunicipalities(selectedProvince);

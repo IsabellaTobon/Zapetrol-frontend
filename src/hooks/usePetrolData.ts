@@ -19,7 +19,7 @@ export const usePetrolData = () => {
         const provinces = await getPetrolProvinces();
         setProvinces(provinces);
       } catch (error) {
-        console.error(error);
+        // Silent error - provinces not loaded
       }
     };
 
@@ -32,7 +32,7 @@ export const usePetrolData = () => {
         const municipalities = await getPetrolMunicipalities(provinceId);
         setMunicipalities(municipalities);
       } catch (error) {
-        console.error(error);
+        // Silent error - municipalities not loaded
       }
     };
 
@@ -49,7 +49,7 @@ export const usePetrolData = () => {
         const stations = await getPetrolStations(municipalityId);
         setStations(stations);
       } catch (error) {
-        console.error(error);
+        // Silent error - stations not loaded
       }
     };
 

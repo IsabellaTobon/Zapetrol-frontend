@@ -3,14 +3,14 @@ import { favoritesService } from '../services/favoritesService';
 import type { Favorite } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 
-// Hook personalizado para manejar el estado de favoritos
+// Personalized hook to manage user favorites
 export const useFavorites = () => {
     const [favorites, setFavorites] = useState<Favorite[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { isAuthenticated } = useAuth();
 
-    // Cargar favoritos del usuario
+    // Charge user favorites from the API
     const loadFavorites = async () => {
         if (!isAuthenticated) {
             setFavorites([]);
@@ -25,13 +25,12 @@ export const useFavorites = () => {
             setFavorites(data);
         } catch (err) {
             setError('Error al cargar favoritos');
-            console.error('Error loading favorites:', err);
         } finally {
             setLoading(false);
         }
     };
 
-    // Agregar gasolinera a favoritos
+    // Add a petrol station to favorites
     const addToFavorites = async (stationId: number): Promise<boolean> => {
         if (!isAuthenticated) return false;
 
@@ -41,12 +40,11 @@ export const useFavorites = () => {
             return true;
         } catch (err) {
             setError('Error al agregar a favoritos');
-            console.error('Error adding favorite:', err);
             return false;
         }
     };
 
-    // Eliminar gasolinera de favoritos
+    // Remove a petrol station from favorites
     const removeFromFavorites = async (favoriteId: number): Promise<boolean> => {
         try {
             await favoritesService.removeFavorite(favoriteId);
@@ -54,23 +52,22 @@ export const useFavorites = () => {
             return true;
         } catch (err) {
             setError('Error al eliminar de favoritos');
-            console.error('Error removing favorite:', err);
             return false;
         }
     };
 
-    // Verificar si una gasolinera es favorita (búsqueda local)
+    // Verify if a petrol station is in favorites
     const isFavorite = (stationId: number): boolean => {
         return favorites.some(fav => fav.stationId === stationId);
     };
 
-    // Obtener el ID del favorito para una gasolinera específica
+    // Get the favorite ID for a specific petrol station
     const getFavoriteId = (stationId: number): number | null => {
         const favorite = favorites.find(fav => fav.stationId === stationId);
         return favorite?.id || null;
     };
 
-    // Cargar favoritos cuando el usuario se autentica
+    // Charge user favorites when authenticated
     useEffect(() => {
         loadFavorites();
     }, [isAuthenticated]);

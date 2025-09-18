@@ -5,8 +5,8 @@
 // ===== CONFIGURACIÓN DE VALIDACIÓN =====
 export const VALIDATION_CONFIG = {
     EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    PASSWORD_MIN_LENGTH: 8,
-    NAME_MIN_LENGTH: 2,
+    PASSWORD_MIN_LENGTH: 6, // Cambiado a 6 caracteres
+    NAME_MIN_LENGTH: 3,
     NAME_MAX_LENGTH: 50,
 } as const;
 

@@ -45,10 +45,27 @@ export const authService = {
     },
 
     /**
-     * Verificar si el usuario está autenticado
+     * Verificar si el usuario está autenticado y el token es válido
      */
     isAuthenticated(): boolean {
-        return !!this.getToken();
+        const token = this.getToken();
+        if (!token) return false;
+
+        // Verificar si el token ha expirado (básico)
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            const now = Date.now() / 1000;
+
+            if (payload.exp && payload.exp < now) {
+                this.clearAuthData();
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            this.clearAuthData();
+            return false;
+        }
     },
 
     /**
@@ -68,7 +85,6 @@ export const authService = {
         try {
             return JSON.parse(userStr);
         } catch (error) {
-            console.warn('Error al parsear usuario desde localStorage:', error);
             return null;
         }
     },

@@ -20,7 +20,7 @@ export const usePetrolDataWithGeolocation = () => {
 
     const geolocation = useGeolocation();
 
-    // Cargar provincias al inicio
+    // Charge provinces on mount
     useEffect(() => {
         const getProvinces = async () => {
             try {
@@ -35,7 +35,7 @@ export const usePetrolDataWithGeolocation = () => {
         getProvinces();
     }, []);
 
-    // Cargar municipios cuando se selecciona una provincia
+    // Charge municipalities when a province is selected
     useEffect(() => {
         const getMunicipalities = async (provinceId: number) => {
             try {
@@ -54,7 +54,7 @@ export const usePetrolDataWithGeolocation = () => {
         }
     }, [selectedProvince, searchMode]);
 
-    // Cargar gasolineras cuando se selecciona un municipio
+    // Charge petrol stations when a municipality is selected
     useEffect(() => {
         const getStations = async (municipalityId: number) => {
             try {
@@ -75,7 +75,7 @@ export const usePetrolDataWithGeolocation = () => {
         }
     }, [selectedMunicipality, searchMode]);
 
-    // Buscar gasolineras cercanas cuando se obtiene la ubicación
+    // Search for nearby petrol stations when location is obtained
     useEffect(() => {
         const findNearbyStations = async () => {
             if (!geolocation.location || searchMode !== 'location') return;
@@ -84,16 +84,16 @@ export const usePetrolDataWithGeolocation = () => {
                 setIsLoadingStations(true);
                 setError(null);
 
-                // Usar la nueva API de búsqueda por coordenadas
+                // Use the new API for searching by coordinates
                 const nearbyStations = await getStationsByCoordinates(
                     geolocation.location.latitude,
                     geolocation.location.longitude,
-                    20 // Radio de 20km
+                    20 // Radius of 20km
                 );
 
                 setStations(nearbyStations);
 
-                // Si no se encontraron estaciones, mostrar un mensaje útil
+                // If no stations were found, show a helpful message
                 if (nearbyStations.length === 0) {
                     setError('No se encontraron gasolineras en un radio de 20km de tu ubicación');
                 }
@@ -114,7 +114,7 @@ export const usePetrolDataWithGeolocation = () => {
             setError(null);
             await geolocation.getCurrentLocation();
             setSearchMode('location');
-            // Limpiar selecciones manuales
+            // Clear manual selections
             setSelectedProvince(null);
             setSelectedMunicipality(null);
             setMunicipalities([]);
@@ -132,26 +132,26 @@ export const usePetrolDataWithGeolocation = () => {
     };
 
     return {
-        // Datos básicos
+        // Basic data
         provinces,
         municipalities,
         stations,
 
-        // Selecciones manuales
+        // Manual selections
         selectedProvince,
         setSelectedProvince,
         selectedMunicipality,
         setSelectedMunicipality,
 
-        // Geolocalización
+        // Geolocation
         geolocation,
         searchMode,
 
-        // Estados de carga y error
+        // Loading and error states
         isLoadingStations,
         error,
 
-        // Acciones
+        // Actions
         handleLocationSearch,
         handleManualSearch,
     };

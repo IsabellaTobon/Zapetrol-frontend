@@ -66,7 +66,7 @@ export const useGeolocation = () => {
                 {
                     enableHighAccuracy: true,
                     timeout: 10000,
-                    maximumAge: 300000, // 5 minutos
+                    maximumAge: 300000, // 5 min
                 }
             );
         });

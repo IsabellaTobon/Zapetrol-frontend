@@ -59,7 +59,7 @@ export const getStationsByCoordinates = async (
       }));
     }
   } catch (error) {
-    console.warn("Endpoint /estaciones/radio no disponible, usando fallback:", error);
+    // Fallback silencioso a cálculo local
   }
 
   // Fallback: calcular distancias localmente
@@ -88,7 +88,6 @@ export const getStationsByCoordinates = async (
       }));
 
   } catch (error) {
-    console.error("Error al buscar estaciones por coordenadas:", error);
     return [];
   }
 };

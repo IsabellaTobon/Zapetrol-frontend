@@ -1,6 +1,6 @@
 /**
- * Hook personalizado para validación de formularios
- * Proporciona validaciones comunes y manejo de errores
+ * Perssonalized hook for form validation
+ * Brings common validations and error handling
  */
 
 import { useState, useCallback } from 'react';
@@ -62,7 +62,7 @@ export const useFormValidation = (rules: ValidationRules): UseFormValidationRetu
                 case 'email':
                     return 'El formato del email no es válido';
                 case 'password':
-                    return 'La contraseña debe contener al menos una letra y un número';
+                    return 'La contraseña debe contener: 1 mayúscula, 1 minúscula, 1 número y 1 símbolo especial';
                 default:
                     return 'El formato no es válido';
             }
@@ -113,7 +113,7 @@ export const useFormValidation = (rules: ValidationRules): UseFormValidationRetu
     };
 };
 
-// Reglas de validación predefinidas
+// Validation rules for authentication forms
 export const authValidationRules = {
     name: {
         required: true,
@@ -127,7 +127,7 @@ export const authValidationRules = {
     },
     password: {
         required: true,
-        minLength: 8,
-        pattern: /^(?=.*[a-zA-Z])(?=.*\d)/
+        minLength: 6,
+        // Non obligatory pattern, only minimum length
     }
 };

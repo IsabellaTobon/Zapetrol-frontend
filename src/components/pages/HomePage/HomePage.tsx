@@ -1,5 +1,5 @@
-import React from 'react';
-import { usePetrolData } from '../../../hooks/usePetrolData';
+﻿import React from 'react';
+import { usePetrolDataWithGeolocation } from '../../../hooks/usePetrolDataWithGeolocation';
 import { HeroSection } from './HeroSection';
 import { StatsSection } from './StatsSection';
 import { FeaturesSection } from './FeaturesSection';
@@ -15,12 +15,18 @@ export const HomePage: React.FC = () => {
         selectedProvince,
         setSelectedProvince,
         selectedMunicipality,
-        setSelectedMunicipality
-    } = usePetrolData();
+        setSelectedMunicipality,
+        geolocation,
+        searchMode,
+        isLoadingStations,
+        error,
+        handleLocationSearch,
+        handleManualSearch
+    } = usePetrolDataWithGeolocation();
 
     const stats = {
         total: stations.length || 11500,
-        averagePrice: '1.45�',
+        averagePrice: '1.45€',
         cities: '8,000+'
     };
 
@@ -30,7 +36,7 @@ export const HomePage: React.FC = () => {
 
             <StatsSection
                 stats={stats}
-                isLoading={false}
+                isLoading={isLoadingStations}
             />
 
             <FeaturesSection />
@@ -41,10 +47,14 @@ export const HomePage: React.FC = () => {
                 selectedProvinceId={selectedProvince}
                 selectedMunicipalityId={selectedMunicipality}
                 stations={stations}
-                isLoading={false}
-                error={null}
+                isLoading={isLoadingStations}
+                error={error}
+                searchMode={searchMode}
+                geolocation={geolocation}
                 onProvinceSelect={setSelectedProvince}
                 onMunicipalitySelect={setSelectedMunicipality}
+                onLocationSearch={handleLocationSearch}
+                onManualSearch={handleManualSearch}
             />
 
             <CTASection />

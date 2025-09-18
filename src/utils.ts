@@ -258,3 +258,73 @@ export const retry = async <T>(
         return retry(fn, attempts - 1, delayMs);
     }
 };
+
+// ===== UTILIDADES DE GEOLOCALIZACIÓN =====
+
+/**
+ * Calcula la distancia entre dos puntos geográficos usando la fórmula de Haversine
+ * @param lat1 Latitud del primer punto
+ * @param lon1 Longitud del primer punto
+ * @param lat2 Latitud del segundo punto
+ * @param lon2 Longitud del segundo punto
+ * @returns Distancia en kilómetros
+ */
+export const calculateDistance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+): number => {
+    const R = 6371; // Radio de la Tierra en kilómetros
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return Math.round(distance * 100) / 100; // Redondear a 2 decimales
+};
+
+/**
+ * Convierte grados a radianes
+ */
+const toRadians = (degrees: number): number => {
+    return degrees * (Math.PI / 180);
+};
+
+/**
+ * Formatea la distancia para mostrar al usuario
+ */
+export const formatDistance = (distance: number): string => {
+    if (distance < 1) {
+        return `${Math.round(distance * 1000)}m`;
+    }
+    return `${distance.toFixed(1)}km`;
+};
+
+/**
+ * Ordena gasolineras por distancia respecto a una ubicación
+ */
+export const sortStationsByDistance = <T extends { latitud?: string | number; longitud?: string | number }>(
+    stations: T[],
+    userLatitude: number,
+    userLongitude: number
+): (T & { distance: number })[] => {
+    return stations
+        .filter(station => station.latitud && station.longitud)
+        .map(station => ({
+            ...station,
+            distance: calculateDistance(
+                userLatitude,
+                userLongitude,
+                typeof station.latitud === 'string' ? parseFloat(station.latitud) : station.latitud!,
+                typeof station.longitud === 'string' ? parseFloat(station.longitud) : station.longitud!
+            )
+        }))
+        .sort((a, b) => a.distance - b.distance);
+};

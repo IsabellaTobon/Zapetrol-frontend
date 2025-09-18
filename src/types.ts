@@ -25,6 +25,9 @@ export interface PetrolStation {
     Gasolina98: string | null;
     Diesel: string | null;
     marca: string;
+    latitud?: string | number;
+    longitud?: string | number;
+    distancia?: number; // Distancia en km cuando viene de búsqueda por proximidad
 }
 
 // ===== TIPOS DE FAVORITOS =====

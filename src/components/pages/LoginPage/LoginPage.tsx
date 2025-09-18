@@ -98,8 +98,6 @@ export const LoginPage: React.FC = () => {
             // Redirigir al dashboard
             navigate('/dashboard');
         } catch (err: any) {
-            console.error('Error en login:', err);
-
             let errorMessage = 'Error al iniciar sesión. Intenta de nuevo.';
 
             // Manejar diferentes tipos de errores

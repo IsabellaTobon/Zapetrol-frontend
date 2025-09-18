@@ -106,7 +106,7 @@ export const setStorageItem = (key: string, value: unknown): void => {
     try {
         localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-        console.warn('Error al guardar en localStorage:', error);
+        // Error silencioso al guardar
     }
 };
 
@@ -118,7 +118,6 @@ export const getStorageItem = <T>(key: string): T | null => {
         const item = localStorage.getItem(key);
         return item ? JSON.parse(item) : null;
     } catch (error) {
-        console.warn('Error al leer de localStorage:', error);
         return null;
     }
 };
@@ -130,7 +129,7 @@ export const removeStorageItem = (key: string): void => {
     try {
         localStorage.removeItem(key);
     } catch (error) {
-        console.warn('Error al eliminar de localStorage:', error);
+        // Error silencioso al eliminar
     }
 };
 

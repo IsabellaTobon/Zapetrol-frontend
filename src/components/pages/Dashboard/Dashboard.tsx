@@ -39,7 +39,7 @@ export const Dashboard: React.FC = () => {
             const allUsers = await userService.getAllUsers();
             setUsers(allUsers);
         } catch (error) {
-            console.error('Error cargando usuarios:', error);
+            // Error silencioso al cargar usuarios
         } finally {
             setIsLoadingUsers(false);
         }

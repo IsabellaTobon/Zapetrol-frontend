@@ -19,7 +19,7 @@ export const FavoritesTab: React.FC = () => {
                 await removeFromFavorites(favoriteId);
             }
         } catch (error) {
-            console.error('Error al eliminar favorito:', error);
+            // Error silencioso al eliminar favorito
         }
     };
 

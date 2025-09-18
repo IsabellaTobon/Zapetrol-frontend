@@ -27,7 +27,6 @@ export const usePetrolDataWithGeolocation = () => {
                 const provinces = await getPetrolProvinces();
                 setProvinces(provinces);
             } catch (error) {
-                console.error('Error al cargar provincias:', error);
                 setError('Error al cargar provincias');
             }
         };
@@ -42,7 +41,6 @@ export const usePetrolDataWithGeolocation = () => {
                 const municipalities = await getPetrolMunicipalities(provinceId);
                 setMunicipalities(municipalities);
             } catch (error) {
-                console.error('Error al cargar municipios:', error);
                 setError('Error al cargar municipios');
             }
         };
@@ -63,7 +61,6 @@ export const usePetrolDataWithGeolocation = () => {
                 const stations = await getPetrolStations(municipalityId);
                 setStations(stations);
             } catch (error) {
-                console.error('Error al cargar gasolineras:', error);
                 setError('Error al cargar gasolineras');
             } finally {
                 setIsLoadingStations(false);
@@ -99,7 +96,6 @@ export const usePetrolDataWithGeolocation = () => {
                 }
 
             } catch (error) {
-                console.error('Error al buscar gasolineras cercanas:', error);
                 setError('No se pudieron cargar las gasolineras cercanas. Intenta con la búsqueda manual.');
             } finally {
                 setIsLoadingStations(false);
@@ -119,7 +115,6 @@ export const usePetrolDataWithGeolocation = () => {
             setSelectedMunicipality(null);
             setMunicipalities([]);
         } catch (error) {
-            console.error('Error al obtener ubicación:', error);
             setError('Error al obtener la ubicación');
         }
     };

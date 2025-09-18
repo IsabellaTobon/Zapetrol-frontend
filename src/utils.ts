@@ -2,41 +2,7 @@
  * Utilidades comunes de la aplicación
  */
 
-import { VALIDATION_CONFIG } from './constants';
-
-// ===== UTILIDADES DE VALIDACIÓN =====
-
-/**
- * Valida si un email tiene formato correcto
- */
-export const isValidEmail = (email: string): boolean => {
-    return VALIDATION_CONFIG.EMAIL_REGEX.test(email.trim());
-};
-
-/**
- * Valida si una contraseña cumple los requisitos mínimos
- */
-export const isValidPassword = (password: string): boolean => {
-    return password.length >= VALIDATION_CONFIG.PASSWORD_MIN_LENGTH;
-};
-
-/**
- * Valida si un nombre cumple los requisitos
- */
-export const isValidName = (name: string): boolean => {
-    const trimmedName = name.trim();
-    return trimmedName.length >= VALIDATION_CONFIG.NAME_MIN_LENGTH &&
-        trimmedName.length <= VALIDATION_CONFIG.NAME_MAX_LENGTH;
-};
-
 // ===== UTILIDADES DE FORMATO =====
-
-/**
- * Capitaliza la primera letra de una cadena
- */
-export const capitalize = (str: string): string => {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-};
 
 /**
  * Formatea un precio con símbolo de euro

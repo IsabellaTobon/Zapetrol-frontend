@@ -26,7 +26,6 @@ export const favoritesService = {
             const response = await apiClient.get(`/favorites/check/${stationId}`);
             return response.data.isFavorite;
         } catch (error) {
-            console.error('Error checking favorite status:', error);
             return false;
         }
     }

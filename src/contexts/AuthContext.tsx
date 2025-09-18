@@ -53,7 +53,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 setUser(currentUser);
             }
         } catch (error) {
-            console.warn('Error al verificar autenticación:', error);
             authService.logout();
         } finally {
             setIsLoading(false);

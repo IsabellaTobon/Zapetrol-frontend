@@ -1,8 +1,10 @@
 ﻿import React from 'react';
-import { usePetrolData } from '../../../hooks/usePetrolData';
-import { ProvinceSelector } from '../../petrol/ProvinceSelector';
-import { MunicipalitySelector } from '../../petrol/MunicipalitySelector';
-import { StationList } from '../../petrol/StationList';
+import { usePetrolDataWithGeolocation } from '../../../hooks/usePetrolDataWithGeolocation';
+import { HeroSection } from './HeroSection';
+import { StatsSection } from './StatsSection';
+import { FeaturesSection } from './FeaturesSection';
+import { SearchSection } from './SearchSection';
+import { CTASection } from './CTASection';
 import './HomePage.css';
 
 export const HomePage: React.FC = () => {
@@ -13,47 +15,49 @@ export const HomePage: React.FC = () => {
         selectedProvince,
         setSelectedProvince,
         selectedMunicipality,
-        setSelectedMunicipality
-    } = usePetrolData();
+        setSelectedMunicipality,
+        geolocation,
+        searchMode,
+        isLoadingStations,
+        error,
+        handleLocationSearch,
+        handleManualSearch
+    } = usePetrolDataWithGeolocation();
+
+    const stats = {
+        total: stations.length || 11500,
+        averagePrice: '1.45€',
+        cities: '8,000+'
+    };
 
     return (
         <div className="homepage">
-            <div className="space-y-12">
-                <div className="hero-section">
-                    <h1 className="hero-title">
-                        Encuentra las mejores ofertas de combustible
-                    </h1>
-                    <p className="hero-subtitle">
-                        Compara precios de carburantes en estaciones de servicio.
-                    </p>
-                </div>
+            <HeroSection />
 
-                <section className="search-section">
-                    <div className="search-container">
-                        <h2 className="search-title">Buscar gasolineras</h2>
-                        <div className="search-controls">
-                            <ProvinceSelector
-                                provinces={provinces}
-                                selectedId={selectedProvince}
-                                onSelect={setSelectedProvince}
-                            />
-                            {selectedProvince && (
-                                <MunicipalitySelector
-                                    municipalities={municipalities}
-                                    selectedId={selectedMunicipality}
-                                    onSelect={setSelectedMunicipality}
-                                />
-                            )}
-                        </div>
-                    </div>
-                </section>
+            <StatsSection
+                stats={stats}
+                isLoading={isLoadingStations}
+            />
 
-                {stations.length > 0 && (
-                    <section className="results-section">
-                        <StationList stations={stations} />
-                    </section>
-                )}
-            </div>
+            <FeaturesSection />
+
+            <SearchSection
+                provinces={provinces}
+                municipalities={municipalities}
+                selectedProvinceId={selectedProvince}
+                selectedMunicipalityId={selectedMunicipality}
+                stations={stations}
+                isLoading={isLoadingStations}
+                error={error}
+                searchMode={searchMode}
+                geolocation={geolocation}
+                onProvinceSelect={setSelectedProvince}
+                onMunicipalitySelect={setSelectedMunicipality}
+                onLocationSearch={handleLocationSearch}
+                onManualSearch={handleManualSearch}
+            />
+
+            <CTASection />
         </div>
     );
 };

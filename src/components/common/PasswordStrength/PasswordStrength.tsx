@@ -18,9 +18,9 @@ interface StrengthCheck {
 
 const strengthChecks: StrengthCheck[] = [
     {
-        label: 'Al menos 8 caracteres',
-        test: (password) => password.length >= 8,
-        weight: 2
+        label: 'Al menos 6 caracteres',
+        test: (password) => password.length >= 6,
+        weight: 3 // Peso mayor por ser el requisito mínimo
     },
     {
         label: 'Contiene mayúsculas',
@@ -38,9 +38,9 @@ const strengthChecks: StrengthCheck[] = [
         weight: 2
     },
     {
-        label: 'Contiene símbolos',
-        test: (password) => /[!@#$%^&*(),.?":{}|<>]/.test(password),
-        weight: 2
+        label: 'Contiene símbolos (opcional)',
+        test: (password) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+        weight: 1 // Peso menor por ser opcional
     }
 ];
 
@@ -53,20 +53,20 @@ const getPasswordStrength = (password: string) => {
     const percentage = (score / maxScore) * 100;
 
     let level: 'weak' | 'fair' | 'good' | 'strong' = 'weak';
-    let text = 'Muy débil';
+    let text = 'Contraseña muy débil';
 
-    if (percentage >= 80) {
+    if (score >= 7) { // 7-8 puntos
         level = 'strong';
-        text = 'Fuerte';
-    } else if (percentage >= 60) {
+        text = 'Contraseña muy segura';
+    } else if (score >= 5) { // 5-6 puntos
         level = 'good';
-        text = 'Buena';
-    } else if (percentage >= 40) {
+        text = 'Contraseña segura';
+    } else if (score >= 3) { // 3-4 puntos
         level = 'fair';
-        text = 'Regular';
-    }
+        text = 'Contraseña aceptable';
+    } // else weak (0-2 puntos)
 
-    return { score: percentage, level, text, checks: passedChecks };
+    return { score: percentage, level, text };
 };
 
 export const PasswordStrength: React.FC<PasswordStrengthProps> = ({
@@ -79,13 +79,6 @@ export const PasswordStrength: React.FC<PasswordStrengthProps> = ({
 
     return (
         <div className="password-strength">
-            <div className="strength-header">
-                <span className="strength-label">Fortaleza de la contraseña:</span>
-                <span className={`strength-text strength-${strength.level}`}>
-                    {strength.text}
-                </span>
-            </div>
-
             <div className="strength-bar">
                 <div
                     className={`strength-fill strength-${strength.level}`}
@@ -93,29 +86,10 @@ export const PasswordStrength: React.FC<PasswordStrengthProps> = ({
                 />
             </div>
 
-            <div className="strength-requirements">
-                {strengthChecks.map((check, index) => {
-                    const isPassed = check.test(password);
-                    return (
-                        <div
-                            key={index}
-                            className={`requirement ${isPassed ? 'passed' : 'pending'}`}
-                        >
-                            <div className="requirement-icon">
-                                {isPassed ? (
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <polyline points="20,6 9,17 4,12" />
-                                    </svg>
-                                ) : (
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <circle cx="12" cy="12" r="10" />
-                                    </svg>
-                                )}
-                            </div>
-                            <span className="requirement-text">{check.label}</span>
-                        </div>
-                    );
-                })}
+            <div className="strength-description">
+                <span className={`strength-text strength-${strength.level}`}>
+                    {strength.text}
+                </span>
             </div>
         </div>
     );

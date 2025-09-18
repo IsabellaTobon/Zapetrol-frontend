@@ -30,10 +30,15 @@ apiClient.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
         if (error.response?.status === 401) {
-            // Token expirado o inválido, redirigir a login
+            // Token expirado o inválido
             localStorage.removeItem('access_token');
             localStorage.removeItem('user');
-            window.location.href = '/login';
+
+            // Solo redirigir si no estamos ya en login/register
+            const currentPath = window.location.pathname;
+            if (currentPath !== '/login' && currentPath !== '/register') {
+                window.location.href = '/login';
+            }
         }
         return Promise.reject(error);
     }

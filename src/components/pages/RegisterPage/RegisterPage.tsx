@@ -4,6 +4,7 @@ import { authService } from '../../../services/authService';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useFormValidation, authValidationRules } from '../../../hooks/useFormValidation';
 import { FormInput } from '../../common/FormInput/FormInput';
+import { PasswordStrength } from '../../common/PasswordStrength/PasswordStrength';
 import type { RegisterRequest } from '../../../types';
 import '../../../styles/components/auth.css';
 import './RegisterPage.css';
@@ -82,8 +83,6 @@ export const RegisterPage: React.FC = () => {
             // Redirigir al dashboard
             navigate('/dashboard');
         } catch (err: any) {
-            console.error('Error en registro:', err);
-
             // Manejar diferentes tipos de errores
             if (err.response?.status === 409) {
                 setError('Este email ya está registrado');
@@ -188,6 +187,12 @@ export const RegisterPage: React.FC = () => {
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                                     </svg>
                                 }
+                            />
+
+                            {/* Medidor de fortaleza de contraseña */}
+                            <PasswordStrength
+                                password={formData.password}
+                                show={formData.password.length > 0}
                             />
 
                             <FormInput
